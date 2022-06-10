@@ -7,20 +7,18 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
-  <div *ngIf="!beginGame">
-    <ion-item>
-      <ion-label position="floating">Votre pseudo</ion-label>
-      <ion-input type="text" [(ngModel)]="pseudo"></ion-input>  
-    </ion-item>
-    <ion-item>
-      <ion-label>Difficulté</ion-label>
-      <ion-select [(ngModel)]="difficulty">
-        <ion-select-option *ngFor="let diff of difficulties" value="{{ diff }}">{{ diff | titlecase }}</ion-select-option>
-      </ion-select>  
-    </ion-item>
-    <ion-item>
-      <ion-toggle [(ngModel)]="saveInfos"></ion-toggle> Sauvegarder mes informations
-    </ion-item>
-    <ion-button  [routerLink]="['/jeu']" class="begin-btn" expand="full" (click)="begin()"><ion-icon name="game-controller-outline"></ion-icon> Commencer</ion-button>
-  </div>
+  <ion-item>
+    <ion-label position="floating">Votre pseudo</ion-label>
+    <ion-input type="text" [(ngModel)]="pseudo"></ion-input>  
+  </ion-item>
+  <ion-item>
+    <ion-label>Difficulté</ion-label>
+    <ion-select [(ngModel)]="difficulty">
+      <ion-select-option *ngFor="let diff of difficulties" value="{{ diff }}">{{ diff | titlecase }}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-toggle [(ngModel)]="saveInfos"></ion-toggle> Sauvegarder mes informations
+  </ion-item>
+  <ion-button class="begin-btn" expand="full" (click)="begin()"><ion-icon name="game-controller-outline"></ion-icon> Commencer</ion-button>
 </ion-content>

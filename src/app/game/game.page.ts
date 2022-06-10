@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { OpenTriviaService } from '../open-trivia.service';
 
 @Component({
-  selector: 'app-page-jeu',
-  templateUrl: './page-jeu.component.html',
-  styleUrls: ['./page-jeu.component.scss'],
+  selector: 'app-game',
+  templateUrl: './game.page.html',
+  styleUrls: ['./game.page.scss'],
 })
-export class PageJeuComponent implements OnInit {
+export class GamePage implements OnInit {
 
   pseudo: string = "";
   difficulty: string = "easy";
-  difficulties: string[] = ["easy", "medium", "hard"];
-  saveInfos: boolean = false;
   nextQuestion: boolean = false;
   nbQuestions: number = 10;
   listQuestions: any[] = [];
@@ -21,15 +20,18 @@ export class PageJeuComponent implements OnInit {
   endGame: boolean = false;
   score: number = 0;
 
-
-  constructor( private toastCtrl: ToastController, private openTriviaSrv: OpenTriviaService) { }
+  constructor(private openTriviaSrv: OpenTriviaService,
+              private router: Router,
+              private activatedRoute: ActivatedRoute,
+              private toastCtrl: ToastController) { }
 
   ngOnInit() {
+    this.pseudo = this.activatedRoute.snapshot.params.pseudo;
+    this.difficulty = this.activatedRoute.snapshot.params.difficulty;
     this.loadQuestions();
   }
 
   async loadQuestions() {
-
     try {
       this.listQuestions = await this.openTriviaSrv.getQuestions(this.nbQuestions, this.difficulty);
       this.loadCurrentQuestion();
@@ -64,6 +66,10 @@ export class PageJeuComponent implements OnInit {
     }
   }
 
+  goToScore() {
+    this.router.navigate(['/score', this.score]);
+  }
+
   async showToast(msg: string, color: string) {
     const toast = await this.toastCtrl.create({
       message: msg,
@@ -73,5 +79,4 @@ export class PageJeuComponent implements OnInit {
     });
     toast.present();
   }
-
 }

@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { PageJeuComponent } from './page-jeu/page-jeu.component';
-import { PageScoreComponent } from './page-score/page-score.component';
 
 const routes: Routes = [
   {
@@ -14,12 +12,12 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'jeu',
-    component: PageJeuComponent
+    path: 'game/:pseudo/:difficulty',
+    loadChildren: () => import('./game/game.module').then( m => m.GamePageModule)
   },
   {
-    path: 'score',
-    component: PageScoreComponent
+    path: 'score/:score',
+    loadChildren: () => import('./score/score.module').then( m => m.ScorePageModule)
   },
 ];
 

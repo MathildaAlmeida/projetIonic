@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
-import { OpenTriviaService } from '../open-trivia.service';
 
 @Component({
   selector: 'app-home',
@@ -14,12 +14,14 @@ export class HomePage {
   difficulties: string[] = ["easy", "medium", "hard"];
   saveInfos: boolean = false;
 
-  constructor(private toastCtrl: ToastController, private openTriviaSrv: OpenTriviaService) {}
+  constructor(private router: Router, private toastCtrl: ToastController) {}
 
   begin() {
     if (this.pseudo.length < 3) {
       this.showToast("Veuillez rentrer un pseudo de 3 caractères ou plus !", "danger");
-    } 
+    } else {
+      this.router.navigate(['/game', this.pseudo, this.difficulty]);
+    }
   }
 
   async showToast(msg: string, color: string) {
@@ -31,5 +33,4 @@ export class HomePage {
     });
     toast.present();
   }
-
 }

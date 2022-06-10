@@ -17,15 +17,5 @@ export class OpenTriviaService {
     } else {
       throw Error("Erreur : impossible de récupérer les questions ! Vérifiez votre connexion !");
     }
-
-    // return new Promise((resolve, reject) => {
-    //   this.http.get(this.url + "?amount=" + nbQuestions + "&difficulty=" + difficulty).toPromise().then((result: any) => {
-    //     if (result != null) {
-    //       resolve(result.results);
-    //     } else {
-    //       reject("Erreur : impossible de récupérer les questions ! Vérifiez votre connexion !");
-    //     }
-    //   });
-    // });
   }
 }
